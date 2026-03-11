@@ -1,214 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Birthday Invitation</title>
+<meta charset="UTF-8">
+<title>Birthday Invitation</title>
 
-    <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+<style>
 
-        /* Background */
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #ff7eb3, #ff758c, #ffb199);
-            background-size: 400% 400%;
-            animation: bgmove 8s infinite alternate;
-            overflow: hidden;
-        }
+/* Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
 
-        /* Background animation */
-        @keyframes bgmove {
-            0% {
-                background-position: left;
-            }
+/* Background */
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff7eb3,#ff758c,#ffb199);
+background-size:400% 400%;
+animation:bgmove 8s infinite alternate;
+overflow:hidden;
+}
 
-            100% {
-                background-position: right;
-            }
-        }
+/* Background animation */
+@keyframes bgmove{
+0%{background-position:left;}
+100%{background-position:right;}
+}
 
-        /* Floating balloons */
-        .balloon {
-            position: absolute;
-            bottom: -150px;
-            border-radius: 50%;
-            opacity: 0.9;
-            animation: float linear infinite;
-        }
+/* Floating balloons */
+.balloon{
+position:absolute;
+bottom:-150px;
+width:60px;
+height:80px;
+border-radius:50%;
+opacity:0.8;
+animation:float 10s infinite;
+}
 
-        .balloon::after {
-            content: "";
-            position: absolute;
-            width: 2px;
-            height: 40px;
-            background: #444;
-            left: 50%;
-            top: 100%;
-        }
+.balloon::after{
+content:"";
+position:absolute;
+width:2px;
+height:40px;
+background:#333;
+left:50%;
+top:80px;
+}
 
-        /* Balloon floating animation */
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
+.balloon:nth-child(1){
+background:#ff4d6d;
+left:10%;
+animation-delay:0s;
+}
 
-            100% {
-                transform: translateY(-120vh);
-            }
-        }
+.balloon:nth-child(2){
+background:#ffd166;
+left:25%;
+animation-delay:2s;
+}
 
-        /* Invitation Card */
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            width: 360px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            transition: transform 0.4s;
-            z-index: 10;
-        }
+.balloon:nth-child(3){
+background:#06d6a0;
+left:70%;
+animation-delay:4s;
+}
 
-        .card:hover {
-            transform: scale(1.05) rotate(-1deg);
-        }
+.balloon:nth-child(4){
+background:#4cc9f0;
+left:85%;
+animation-delay:6s;
+}
 
-        /* Title */
-        h1 {
-            color: #ff4d6d;
-            font-size: 34px;
-            margin-bottom: 10px;
-        }
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+100%{
+transform:translateY(-110vh);
+}
+}
 
-        /* Subtitle */
-        .subtitle {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #444;
-        }
+/* Invitation Card */
+.card{
+background:rgba(255,255,255,0.95);
+padding:40px;
+border-radius:20px;
+text-align:center;
+width:360px;
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+backdrop-filter:blur(8px);
+transition:transform 0.4s;
+}
 
-        /* Details */
-        .details {
-            background: #fff0f5;
-            padding: 15px;
-            border-radius: 12px;
-            margin: 15px 0;
-            font-size: 17px;
-            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
-        }
+.card:hover{
+transform:scale(1.05) rotate(-1deg);
+}
 
-        /* Highlight text */
-        .highlight {
-            color: #ff006e;
-            font-weight: bold;
-        }
+/* Title */
+h1{
+color:#ff4d6d;
+font-size:34px;
+margin-bottom:10px;
+}
 
-        /* Button */
-        button {
-            margin-top: 20px;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #ff006e, #ff7eb3);
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
+/* Subtitle */
+.subtitle{
+font-size:18px;
+margin-bottom:20px;
+color:#444;
+}
 
-        button:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
+/* Details */
+.details{
+background:#fff0f5;
+padding:15px;
+border-radius:12px;
+margin:15px 0;
+font-size:17px;
+box-shadow:inset 0 0 8px rgba(0,0,0,0.1);
+}
 
-        button:active {
-            transform: scale(0.95);
-        }
+/* Highlight text */
+.highlight{
+color:#ff006e;
+font-weight:bold;
+}
 
-        /* Footer text */
-        .footer {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
+/* Button */
+button{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff006e,#ff7eb3);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:all 0.3s;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+button:hover{
+transform:translateY(-3px) scale(1.1);
+box-shadow:0 12px 25px rgba(0,0,0,0.3);
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+/* Footer text */
+.footer{
+margin-top:15px;
+font-size:14px;
+color:#666;
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- Invitation Card -->
-    <div class="card">
+<!-- Balloons -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
 
-        <h1>🎉 Birthday Party 🎂</h1>
+<!-- Invitation Card -->
+<div class="card">
 
-        <p class="subtitle">You're invited to celebrate with me!</p>
+<h1>🎉 Birthday Party 🎂</h1>
 
-        <div class="details">
-            📍 Venue: <span class="highlight">Spicy Bites</span><br>
-            ⏰ Time: <span class="highlight">6:00 PM</span>
-        </div>
+<p class="subtitle">You're invited to celebrate with me!</p>
 
-        <p>Good food, great friends, and a lot of laughter await you! 🎈</p>
+<div class="details">
+📍 Venue: <span class="highlight">Spicy Bites</span><br>
+⏰ Time: <span class="highlight">6:00 PM</span>
+</div>
 
-        <button>🎉 See You There</button>
+<p>Good food, great friends, and a lot of laughter await you! 🎈</p>
 
-        <p class="footer">Can't wait to celebrate together! ✨</p>
+<button>🎉 See You There</button>
 
-    </div>
+<p class="footer">Can't wait to celebrate together! ✨</p>
 
-    <script>
-
-        /* Balloon generator */
-
-        const colors = [
-            "#ff4d6d",
-            "#ffd166",
-            "#06d6a0",
-            "#4cc9f0",
-            "#ff85a1",
-            "#c77dff",
-            "#ff9f1c"
-        ];
-
-        for (let i = 0; i < 25; i++) {
-
-            let balloon = document.createElement("div");
-            balloon.className = "balloon";
-
-            /* random position */
-            balloon.style.left = Math.random() * 100 + "vw";
-
-            /* random color */
-            balloon.style.background =
-                colors[Math.floor(Math.random() * colors.length)];
-
-            /* random size */
-            let size = 40 + Math.random() * 30;
-            balloon.style.width = size + "px";
-            balloon.style.height = size * 1.3 + "px";
-
-            /* random speed */
-            balloon.style.animationDuration =
-                8 + Math.random() * 6 + "s";
-
-            document.body.appendChild(balloon);
-
-        }
-
-    </script>
+</div>
 
 </body>
-
 </html>
+
+baloons aur zada show ho
