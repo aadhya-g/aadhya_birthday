@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,109 +6,160 @@
 
 <style>
 
+/* Reset */
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins', sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
+/* Background */
 body{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#141e30,#243b55);
+background:linear-gradient(135deg,#ff7eb3,#ff758c,#ffb199);
+background-size:400% 400%;
+animation:bgmove 8s infinite alternate;
 overflow:hidden;
-color:white;
 }
 
-/* subtle floating sparkles */
+/* Background animation */
+@keyframes bgmove{
+0%{background-position:left;}
+100%{background-position:right;}
+}
 
-.sparkle{
+/* Floating balloons */
+.balloon{
 position:absolute;
-width:3px;
-height:3px;
-background:white;
+bottom:-150px;
+width:60px;
+height:80px;
 border-radius:50%;
-opacity:0.7;
-animation:twinkle 4s infinite;
+opacity:0.8;
+animation:float 10s infinite;
 }
 
-@keyframes twinkle{
-0%{opacity:0}
-50%{opacity:1}
-100%{opacity:0}
+.balloon::after{
+content:"";
+position:absolute;
+width:2px;
+height:40px;
+background:#333;
+left:50%;
+top:80px;
 }
 
-/* invitation card */
+.balloon:nth-child(1){
+background:#ff4d6d;
+left:10%;
+animation-delay:0s;
+}
 
+.balloon:nth-child(2){
+background:#ffd166;
+left:25%;
+animation-delay:2s;
+}
+
+.balloon:nth-child(3){
+background:#06d6a0;
+left:70%;
+animation-delay:4s;
+}
+
+.balloon:nth-child(4){
+background:#4cc9f0;
+left:85%;
+animation-delay:6s;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+100%{
+transform:translateY(-110vh);
+}
+}
+
+/* Invitation Card */
 .card{
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.95);
 padding:40px;
-border-radius:18px;
-width:380px;
+border-radius:20px;
 text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.5);
-transition:0.4s;
+width:360px;
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+backdrop-filter:blur(8px);
+transition:transform 0.4s;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.02);
-box-shadow:0 30px 60px rgba(0,0,0,0.6);
+transform:scale(1.05) rotate(-1deg);
 }
 
-/* heading */
-
+/* Title */
 h1{
-font-size:32px;
+color:#ff4d6d;
+font-size:34px;
 margin-bottom:10px;
-letter-spacing:1px;
 }
 
-/* divider line */
-
-.line{
-width:60px;
-height:3px;
-background:#ff7eb3;
-margin:15px auto;
-border-radius:5px;
+/* Subtitle */
+.subtitle{
+font-size:18px;
+margin-bottom:20px;
+color:#444;
 }
 
-/* details */
-
+/* Details */
 .details{
-margin:20px 0;
+background:#fff0f5;
+padding:15px;
+border-radius:12px;
+margin:15px 0;
 font-size:17px;
-line-height:1.8;
+box-shadow:inset 0 0 8px rgba(0,0,0,0.1);
 }
 
-/* button */
+/* Highlight text */
+.highlight{
+color:#ff006e;
+font-weight:bold;
+}
 
+/* Button */
 button{
 margin-top:20px;
-padding:12px 28px;
+padding:12px 25px;
 border:none;
-border-radius:25px;
-background:linear-gradient(45deg,#ff7eb3,#ff758c);
+border-radius:30px;
+background:linear-gradient(45deg,#ff006e,#ff7eb3);
 color:white;
-font-size:15px;
+font-size:16px;
 cursor:pointer;
-transition:0.3s;
+transition:all 0.3s;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 button:hover{
-transform:scale(1.08);
-box-shadow:0 10px 25px rgba(255,120,150,0.5);
+transform:translateY(-3px) scale(1.1);
+box-shadow:0 12px 25px rgba(0,0,0,0.3);
 }
 
+button:active{
+transform:scale(0.95);
+}
+
+/* Footer text */
 .footer{
-margin-top:20px;
+margin-top:15px;
 font-size:14px;
-opacity:0.8;
+color:#666;
 }
 
 </style>
@@ -117,47 +167,31 @@ opacity:0.8;
 
 <body>
 
-<!-- sparkles -->
-<script>
-for(let i=0;i<40;i++){
-let s=document.createElement("div")
-s.className="sparkle"
-s.style.left=Math.random()*100+"vw"
-s.style.top=Math.random()*100+"vh"
-s.style.animationDelay=Math.random()*4+"s"
-document.body.appendChild(s)
-}
-</script>
+<!-- Balloons -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
 
+<!-- Invitation Card -->
 <div class="card">
 
-<h1>Birthday Evening</h1>
+<h1>🎉 Birthday Party 🎂</h1>
 
-<div class="line"></div>
-
-<p>I'd love for you to join me for a small celebration.</p>
+<p class="subtitle">You're invited to celebrate with me!</p>
 
 <div class="details">
-📍 <b>Spicy Bites</b><br>
-🕕 <b>6:00 PM</b>
+📍 Venue: <span class="highlight">Spicy Bites</span><br>
+⏰ Time: <span class="highlight">6:00 PM</span>
 </div>
 
-<button onclick="rsvp()">Click Me</button>
+<p>Good food, great friends, and a lot of laughter await you! 🎈</p>
 
-<div class="footer">
-Good food, good friends, and a good evening.
+<button>🎉 See You There</button>
+
+<p class="footer">Can't wait to celebrate together! ✨</p>
+
 </div>
-
-</div>
-
-<script>
-
-function rsvp(){
-alert("Looking forward to seeing you at Spicy Bites!");
-}
-
-</script>
 
 </body>
 </html>
-```
