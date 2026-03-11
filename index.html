@@ -1,8 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Party Invitation</title>
+<title>Birthday Invitation</title>
 
 <style>
 
@@ -11,7 +12,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Verdana, sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
 /* BACKGROUND */
@@ -20,17 +21,34 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(270deg,#ff7eb3,#ff758c,#ffb199,#ff7eb3);
-background-size:800% 800%;
+background:linear-gradient(270deg,#ff7eb3,#ff758c,#ffb199,#ffd6ff);
+background-size:600% 600%;
 animation:bgmove 10s infinite;
 overflow:hidden;
 }
 
-/* animated gradient */
 @keyframes bgmove{
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
+}
+
+/* SPARKLES */
+
+.sparkle{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 10px white,0 0 20px white;
+animation:sparkle 2s infinite;
+}
+
+@keyframes sparkle{
+0%{transform:scale(0);opacity:0}
+50%{transform:scale(1);opacity:1}
+100%{transform:scale(0);opacity:0}
 }
 
 /* BALLOONS */
@@ -41,11 +59,11 @@ bottom:-120px;
 width:60px;
 height:80px;
 border-radius:50%;
-opacity:.8;
-animation:float 9s infinite;
+animation:float 10s infinite;
+opacity:0.8;
 }
 
-.balloon:after{
+.balloon::after{
 content:"";
 position:absolute;
 height:40px;
@@ -56,9 +74,9 @@ top:80px;
 }
 
 .balloon:nth-child(1){left:10%;background:#ff4d6d;}
-.balloon:nth-child(2){left:30%;background:#ffd166;animation-delay:2s;}
-.balloon:nth-child(3){left:70%;background:#06d6a0;animation-delay:4s;}
-.balloon:nth-child(4){left:85%;background:#4cc9f0;animation-delay:1s;}
+.balloon:nth-child(2){left:30%;background:#ffd166;}
+.balloon:nth-child(3){left:70%;background:#06d6a0;}
+.balloon:nth-child(4){left:85%;background:#4cc9f0;}
 
 @keyframes float{
 0%{transform:translateY(0)}
@@ -68,26 +86,28 @@ top:80px;
 /* CARD */
 
 .card{
-background:white;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(10px);
 padding:40px;
-width:380px;
 border-radius:20px;
 text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,.3);
+width:380px;
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
 animation:glow 3s infinite alternate;
 }
 
 @keyframes glow{
-from{box-shadow:0 0 20px rgba(255,0,100,.3);}
-to{box-shadow:0 0 40px rgba(255,0,100,.6);}
+from{box-shadow:0 0 20px rgba(255,0,100,.4);}
+to{box-shadow:0 0 40px rgba(255,0,100,.8);}
 }
 
 h1{
 color:#ff006e;
 margin-bottom:10px;
+font-size:32px;
 }
 
-/* DETAILS BOX */
+/* DETAILS */
 
 .details{
 background:#fff0f6;
@@ -95,15 +115,6 @@ padding:15px;
 border-radius:12px;
 margin:15px 0;
 font-size:17px;
-}
-
-/* COUNTDOWN */
-
-#countdown{
-font-size:20px;
-margin:10px 0;
-color:#333;
-font-weight:bold;
 }
 
 /* BUTTON */
@@ -116,7 +127,7 @@ font-size:16px;
 background:linear-gradient(45deg,#ff006e,#ff7eb3);
 color:white;
 cursor:pointer;
-transition:.3s;
+transition:0.3s;
 }
 
 button:hover{
@@ -127,9 +138,8 @@ transform:scale(1.15);
 
 .confetti{
 position:fixed;
-width:10px;
-height:10px;
-background:red;
+width:8px;
+height:8px;
 top:0;
 animation:fall 3s linear forwards;
 }
@@ -151,61 +161,44 @@ transform:translateY(100vh) rotate(720deg);
 <div class="balloon"></div>
 <div class="balloon"></div>
 
+<!-- SPARKLES -->
+<script>
+for(let i=0;i<60;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+s.style.animationDelay=Math.random()*2+"s";
+document.body.appendChild(s);
+}
+</script>
+
 <!-- CARD -->
+
 <div class="card">
 
 <h1>🎉 Birthday Party 🎂</h1>
 
-<p>You’re invited to celebrate with me!</p>
+<p>You are invited to celebrate with me!</p>
 
 <div class="details">
 📍 <b>Spicy Bites</b><br>
 ⏰ <b>6:00 PM</b>
 </div>
 
-<div id="countdown"></div>
+<button onclick="celebrate()">RSVP ✨</button>
 
-<button onclick="party()">RSVP 🎈</button>
-
-<p style="margin-top:15px">Food • Friends • Fun ✨</p>
+<p style="margin-top:15px">Food • Friends • Fun 🎈</p>
 
 </div>
 
-
 <script>
 
-/* COUNTDOWN TIMER */
-
-var partyTime = new Date();
-partyTime.setHours(18,0,0);
-
-function updateCountdown(){
-var now = new Date();
-var diff = partyTime - now;
-
-if(diff <= 0){
-document.getElementById("countdown").innerHTML = "🎉 The party has started!";
-return;
-}
-
-var h = Math.floor(diff/1000/60/60);
-var m = Math.floor(diff/1000/60)%60;
-var s = Math.floor(diff/1000)%60;
-
-document.getElementById("countdown").innerHTML =
-"Party starts in: " + h + "h " + m + "m " + s + "s";
-}
-
-setInterval(updateCountdown,1000);
-
-
-/* CONFETTI EFFECT */
-
-function party(){
+function celebrate(){
 
 for(let i=0;i<80;i++){
 
-let confetti = document.createElement("div");
+let confetti=document.createElement("div");
 confetti.className="confetti";
 
 confetti.style.left=Math.random()*100+"vw";
@@ -218,10 +211,12 @@ setTimeout(()=>confetti.remove(),3000);
 
 }
 
-alert("🎉 Yay! See you at Spicy Bites at 6 PM!");
+alert("🎉 See you at Spicy Bites at 6 PM!");
+
 }
 
 </script>
 
 </body>
 </html>
+```
